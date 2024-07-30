@@ -1,0 +1,5 @@
+[2024-07-30 16:34:02,154 ] 16 root - INFO - Logging is set up.
+[2024-07-30 16:34:13,134 ] 8 root - INFO - This execution has started
+[2024-07-30 16:34:13,134 ] 22 root - INFO - Reading from MySQL database
+[2024-07-30 16:34:13,159 ] 29 root - INFO - Connection established
+[2024-07-30 16:35:58,258 ] 29 root - INFO - Data Ingestion is completed
