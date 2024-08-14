@@ -5,7 +5,7 @@ import pandas as pd
 from src.movies_recommendation.exception import CustomException
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
-from src.movies_recommendation.utils import read_sql_data
+# from src.movies_recommendation.utils import read_sql_data
 
 @dataclass
 class DataIngestionConfig:
@@ -20,7 +20,8 @@ class DataIngestion:
     def initiate_data_ingestion(self):  # Corrected the typo here
         try:
             logging.info("Reading from MySQL database")
-            df = read_sql_data()
+            #df = read_sql_data()
+            df=pd.read_csv("E:/movies_recommendation_system/artifacts/raw.csv")
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)
             train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
@@ -38,4 +39,4 @@ class DataIngestion:
 
 if __name__ == "__main__":
     ingestion = DataIngestion()
-    ingestion.initiate_data_ingestion()  # Corrected the typo here
+    ingestion.initiate_data_ingestion()  
