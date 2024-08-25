@@ -3,3 +3,4 @@ pandas
 scikit-learn
 Pymysql
 python-dotenv
+nltk
