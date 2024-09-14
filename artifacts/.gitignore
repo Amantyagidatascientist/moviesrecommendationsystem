@@ -1,3 +1,15 @@
 /raw.csv
 /test.csv
 /train.csv
+/Knn_item.pkl
+/Knn_user.pkl
+artifacts/Knn_item.pkl
+artifacts/Knn_user.pkl
+/train_data_arr_Collaborative.pkl
+/train_data_arr_Content_cosine.pkl
+/train_target_data_extraction.pkl
+/train_data_arr_Content.pkl
+artifacts/train_target_data_extraction.pkl
+artifacts/train_data_arr_Content_cosine.pkl
+artifacts/train_data_arr_Collaborative.pkl
+artifacts/train_data_arr_Content.pkl
