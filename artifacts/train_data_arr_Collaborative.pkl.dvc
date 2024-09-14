@@ -1,0 +1,5 @@
+outs:
+- md5: e477932da1979320a1303ad5c80db93e
+  size: 8353005
+  hash: md5
+  path: train_data_arr_Collaborative.pkl

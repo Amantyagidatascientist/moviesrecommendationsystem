@@ -1,0 +1,5 @@
+outs:
+- md5: b48fe41319ea2aff2eb661af351d9174
+  size: 1055504727
+  hash: md5
+  path: Knn_item.pkl

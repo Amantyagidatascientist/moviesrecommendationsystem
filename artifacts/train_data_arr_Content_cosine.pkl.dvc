@@ -1,0 +1,5 @@
+outs:
+- md5: f4df932f3e7e6dd106d398cb778c741b
+  size: 1055504386
+  hash: md5
+  path: train_data_arr_Content_cosine.pkl

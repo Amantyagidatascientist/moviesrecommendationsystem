@@ -1,0 +1,5 @@
+outs:
+- md5: 90eefe953ec6063bdc9067f70ac4a743
+  size: 3132565
+  hash: md5
+  path: Knn_user.pkl
