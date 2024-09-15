@@ -26,8 +26,10 @@ class ModelTrainer:
         try:
             if isinstance(array, pd.DataFrame):
                 array = array.to_numpy()
-            array[np.isinf(array)] = 0
-            array[np.isnan(array)] = 0
+                array = array.astype(np.float64, errors='ignore')
+                array[np.isinf(array)] = 0
+                array[np.isnan(array)] = 0
+           
             return array
         except Exception as e:
             logging.error(f"Error handling {array_name} for infinity and NaN values: {str(e)}")
@@ -47,6 +49,8 @@ class ModelTrainer:
     def initiate_model_trainer(self, train_data_arr_Content, train_data_arr_Collaborative):
         try:
             logging.info("Starting model training...")
+            train_data_arr_Content=train_data_arr_Content[:,:-2]
+            train_data_arr_Collaborative=train_data_arr_Collaborative[:,:-2]
 
             # Convert arrays to float32 for memory optimization
             train_data_arr_Content = self.check_and_convert_to_numeric(train_data_arr_Content, "train_data_arr_Content")
@@ -89,10 +93,3 @@ class ModelTrainer:
         except Exception as e:
             logging.error("An error occurred during model training.")
             raise CustomException(e, sys)
-
-
-
-
-
-
-

@@ -3,16 +3,19 @@ from src.movies_recommendation.logger import logging
 import joblib
 import sys
 import numpy as np
+import pandas as pd
 from src.movies_recommendation.exception import CustomException
 from sklearn.neighbors import NearestNeighbors
 
-knn_user = joblib.load('E:/movies_recommendation_system/artifacts/knn_user.pkl')
-knn_item = joblib.load('E:/movies_recommendation_system/artifacts/knn_item.pkl')
-index_data = joblib.load('E:/movies_recommendation_system/artifacts/train_target_data_extraction.pkl')
-reduced_data = joblib.load('E:/movies_recommendation_system/artifacts/train_data_arr_Content_cosine.pkl')
+knn_user = joblib.load('E:/moviesrecommendationsystem/artifacts/Knn_user.pkl')
+knn_item = joblib.load('E:/moviesrecommendationsystem/artifacts/Knn_item.pkl')
+index_data = joblib.load('E:/moviesrecommendationsystem/artifacts/train_target_data_extraction.pkl')
+reduced_data = joblib.load('E:/moviesrecommendationsystem/artifacts/train_data_arr_Content_cosine.pkl')
+
 
 
 class HybridRecommendationSystem:
+    
     def __init__(self):
         try:
             # Load all the necessary components
@@ -20,13 +23,14 @@ class HybridRecommendationSystem:
             self.knn_item = knn_item
             self.index_data = index_data
             self.reduced_data = reduced_data
+
         except Exception as e:
             raise CustomException(e, sys)
 
     def recommend_content_based(self, movie_title):
         try:
             # Find the index of the movie title
-            movie_index = self.index_data[self.index_data == movie_title].index
+            movie_index = self.index_data[self.index_data['title'] == movie_title].index
             if movie_index.empty:
                 return [], []
 
@@ -45,7 +49,7 @@ class HybridRecommendationSystem:
 
     def recommend_collaborative(self, movie_title):
         try:
-            movie_index = self.index_data[self.index_data == movie_title].index
+            movie_index = self.index_data[self.index_data['title'] == movie_title].index
             if movie_index.empty:
                 return [], []
 
@@ -60,6 +64,7 @@ class HybridRecommendationSystem:
             return item_based_recommendations, distances_item[0]
         except Exception as e:
             raise CustomException(e, sys)
+
 
 
     def hybrid_recommendation(self, movie_title):

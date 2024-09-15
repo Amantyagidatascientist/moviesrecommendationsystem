@@ -216,9 +216,8 @@ class DataTransformation:
 
     def get_data_transformer_object(self):
         try:
-            categorical_columns = [
-                'status', 'original_language', 'original_title', 'overview',
-                'tagline', 'genres', 'production_companies', 'production_countries', 'spoken_languages',
+            categorical_columns = ['status', 'original_language',
+                 'genres', 'production_companies', 'production_countries', 'spoken_languages',
                 'keywords'
             ]
 
@@ -229,7 +228,7 @@ class DataTransformation:
 
             space_repalce=['production_companies','production_countries','spoken_languages']
 
-            columns_drop = ['homepage', 'imdb_id', 'backdrop_path', 'poster_path']
+            columns_drop = ['homepage', 'original_title','tagline', 'overview','imdb_id', 'backdrop_path', 'poster_path']
             columns_split = ['genres', 'production_companies', 'production_countries', 'keywords']
 
             sub_pipeline_1 = Pipeline(steps=[
@@ -375,12 +374,28 @@ class DataTransformation:
 
             train_data_arr_Content = preprocessing_obj.fit_transform(input_features_train_df)
             train_data_arr_Collaborative=preprocessing_obj2.fit_transform(input_features_train_df)
-            train_data_arr_Content=train_data_arr_Content
-            train_data_arr_Collaborative=train_data_arr_Collaborative
-            train_data_arr_Content_sparse = csr_matrix(train_data_arr_Content)
-            target_features_train_df=target_features_train_df
 
-            # Ensure target columns align with transformed data
+            target_features_train_df=target_features_train_df[:100000]
+            
+
+            train_data_arr_Content=train_data_arr_Content[:100000]
+            train_data_arr_Content = np.c_[
+                train_data_arr_Content, np.array(target_features_train_df)
+            ]
+           
+
+            train_data_arr_Collaborative=train_data_arr_Collaborative[:100000]
+            train_data_arr_Collaborative = np.c_[
+                train_data_arr_Collaborative, np.array(target_features_train_df)
+            ]
+
+
+            train_data_arr_Content_sparse = np.c_[
+                train_data_arr_Content, np.array(target_features_train_df)
+            ]
+            
+
+
 
             logging.info(f"Shape of train_data_arr: {train_data_arr_Content.shape}")
             logging.info(f"Shape of train_data_arr: {train_data_arr_Collaborative.shape}")
